@@ -25,36 +25,7 @@ public static class ShelterRegistration
     }
 ```
 
-Now we want to inject the ServiceByNameFactory to the AnimalShelter-Class
-And use them:
 
-```csharp
-using Huvermann.Extension.DiNameResolving;
-
-namespace Huvermann.Extensions.DiNameResolving.ServiceFactories.Playground
-{
-    public class AnimalShelter
-    {
-        private IServiceByNameFactory<IAnimalInterface> _animalfactory;
-
-        public AnimalShelter(IServiceByNameFactory<IAnimalInterface> animalfactory)
-        {
-            _animalfactory = animalfactory;
-        }
-
-        public void CreateSomeAnimals()
-        {
-            var dog = _animalfactory.GetServiceByName("Dog");
-            string kind = dog.KindOfAnimal();
-            dog.DoWork("Something");
-
-            var cat = _animalfactory.GetServiceByName("Cat");
-            string kind2 = cat.KindOfAnimal();
-            cat.DoWork("Something");
-        }
-    }
-}
-```
 
 All animal classes implementing the same interface:
 
@@ -91,6 +62,37 @@ public interface IAnimalInterface
             return "Cat";
         }
     }
+```
+
+Now we want to inject the ServiceByNameFactory to the AnimalShelter-Class
+And use them:
+
+```csharp
+using Huvermann.Extension.DiNameResolving;
+
+namespace Huvermann.Extensions.DiNameResolving.ServiceFactories.Playground
+{
+    public class AnimalShelter
+    {
+        private IServiceByNameFactory<IAnimalInterface> _animalfactory;
+
+        public AnimalShelter(IServiceByNameFactory<IAnimalInterface> animalfactory)
+        {
+            _animalfactory = animalfactory;
+        }
+
+        public void CreateSomeAnimals()
+        {
+            var dog = _animalfactory.GetServiceByName("Dog");
+            string kind = dog.KindOfAnimal();
+            dog.DoWork("Something");
+
+            var cat = _animalfactory.GetServiceByName("Cat");
+            string kind2 = cat.KindOfAnimal();
+            cat.DoWork("Something");
+        }
+    }
+}
 ```
 
 
