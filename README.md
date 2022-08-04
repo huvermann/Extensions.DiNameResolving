@@ -1,6 +1,8 @@
 # Extensions.DiNameResolving
 Lightweight DI extension to add names to class registrations.
 
+The purpose of this extension is to provide a simple way to create a factory class that can resolve instances by name.
+
 DI-Container registration example:
 ```charp
 public static class ShelterRegistration
