@@ -7,8 +7,18 @@
     <Copyright>Huvermann Solutions GmbH</Copyright>
     <PackageProjectUrl>https://github.com/huvermann/Extensions.DiNameResolving</PackageProjectUrl>
     <RepositoryUrl>https://github.com/huvermann/Extensions.DiNameResolving</RepositoryUrl>
-    <PackageTags>Dependency Injection, DI, Factory, byname</PackageTags>
+    <PackageTags>Dependency Injection, DI, Factory, byname, dependencyinjection</PackageTags>
+    <Description>The purpose of this extension is to provide a simple way to create a factory class that can resolve instances by name.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
