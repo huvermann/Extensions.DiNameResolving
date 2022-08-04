@@ -42,11 +42,6 @@ namespace Huvermann.Extensions.DiNameResolving.ServiceFactories.Playground
             _animalfactory = animalfactory;
         }
 
-        public IServiceByNameFactory<IAnimalInterface> GetFactory()
-        {
-            return _animalfactory;
-        }
-
         public void CreateSomeAnimals()
         {
             var dog = _animalfactory.GetServiceByName("Dog");
