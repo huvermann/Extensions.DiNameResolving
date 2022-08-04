@@ -56,4 +56,42 @@ namespace Huvermann.Extensions.DiNameResolving.ServiceFactories.Playground
 }
 ```
 
+All animal classes implementing the same interface:
+
+```csharp
+
+public interface IAnimalInterface
+    {
+        public string DoWork(string input);
+        public string KindOfAnimal();
+    }
+
+    public class DogClass : IAnimalInterface
+    {
+        public string DoWork(string input)
+        {
+            return "Wuff";
+        }
+
+        public string KindOfAnimal()
+        {
+            return "Dog";
+        }
+    }
+
+    public class CatClass : IAnimalInterface
+    {
+        public string DoWork(string input)
+        {
+            return "Miauuu";
+        }
+
+        public string KindOfAnimal()
+        {
+            return "Cat";
+        }
+    }
+```
+
+
 
