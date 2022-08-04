@@ -84,11 +84,11 @@ namespace Huvermann.Extensions.DiNameResolving.ServiceFactories.Playground
         public void CreateSomeAnimals()
         {
             var dog = _animalfactory.GetServiceByName("Dog");
-            string kind = dog.KindOfAnimal();
+            Console.WriteLine(dog.KindOfAnimal());
             dog.DoWork("Something");
 
             var cat = _animalfactory.GetServiceByName("Cat");
-            string kind2 = cat.KindOfAnimal();
+            Console.WriteLine(cat.KindOfAnimal());
             cat.DoWork("Something");
         }
     }
