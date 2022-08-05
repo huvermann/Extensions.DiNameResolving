@@ -23,6 +23,52 @@ namespace Huvermann.Extensions.DiNameResolving.ServiceFactories
                 return this;
             }
 
+            internal Fixture WithSingletonRegistration()
+            {
+                _serviceCollection.RemoveAllNameRegs();
+                var services = _serviceCollection;
+                services.AddNamedServiceRegistration();
+                // Register the factory.
+                services.AddTransient<IServiceByNameFactory<IAnimalInterface>, ServiceByNameFactory<IAnimalInterface>>();
+
+                services.AddSingletonByName<IAnimalInterface, DogClass>("Dog");
+                services.AddSingletonByName<IAnimalInterface, CatClass>("Cat");
+
+                // Register the class that uses the factory.
+                services.AddTransient<AnimalShelter>();
+                return this;
+            }
+
+            internal Fixture WithSingletonAndTransistentRegistration()
+            {
+                _serviceCollection.RemoveAllNameRegs();
+                var services = _serviceCollection;
+                services.AddNamedServiceRegistration();
+                // Register the factory.
+                services.AddTransient<IServiceByNameFactory<IAnimalInterface>, ServiceByNameFactory<IAnimalInterface>>();
+
+                services.AddSingletonByName<IAnimalInterface, DogClass>("Dog");
+                services.AddSingletonByName<IAnimalInterface, CatClass>("Cat");
+                services.AddTransientByName<IAnimalInterface, MiceClass>("Mice");
+
+                // Register the class that uses the factory.
+                services.AddTransient<AnimalShelter>();
+                return this;
+            }
+
+            internal Fixture WithScopedRegistration()
+            {
+                _serviceCollection.RemoveAllNameRegs();
+                var services = _serviceCollection;
+                services.AddNamedServiceRegistration();
+                services.AddTransient<IServiceByNameFactory<IAnimalInterface>, ServiceByNameFactory<IAnimalInterface>>();
+
+                services.AddScopedByName<IAnimalInterface, DogClass>("Dog");
+                // Register the class that uses the factory.
+                services.AddScoped<AnimalShelter>();
+                return this;
+            }
+
             internal Fixture WithRegisterMice()
             {
                 var services = _serviceCollection;
@@ -46,7 +92,15 @@ namespace Huvermann.Extensions.DiNameResolving.ServiceFactories
                 return provider.GetService<AnimalShelter>();
             }
 
-            
+            internal AnimalShelter? BuildSopedAnimalShelter()
+            {
+                IServiceProvider provider = _serviceCollection.BuildServiceProvider();
+                var scopeFactory = provider.GetService<IServiceScopeFactory>();
+                var scope = scopeFactory?.CreateScope();
+                return scope?.ServiceProvider.GetService<AnimalShelter>();
+            }
+
+
         }
     }
 }

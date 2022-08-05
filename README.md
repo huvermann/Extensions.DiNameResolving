@@ -96,6 +96,13 @@ namespace Huvermann.Extensions.DiNameResolving.ServiceFactories.Playground
     }
 }
 ```
+It is also possible to register classes as singleton and scoped or mix all those flavours.
 
+Example:
+```csharp
+services.AddScopedByName<IAnimalInterface, DogClass>("Dog");
+services.AddSingletonByName<IAnimalInterface, CatClass>("Cat");
+
+```
 
 
