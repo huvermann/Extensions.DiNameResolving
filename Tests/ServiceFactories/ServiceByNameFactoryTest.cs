@@ -82,5 +82,79 @@ namespace Huvermann.Extensions.DiNameResolving.ServiceFactories
             Assert.Equal("Piep", actual?.DoWork(""));
 
         }
+
+        /// <summary>
+        /// Check two instances are not the same.
+        /// </summary>
+        [Fact]
+        public void ResolveTwoDogs_NotSame()
+        {
+            var factory = new Fixture()
+                .WithShelterRegistration()
+                .Build()?
+                .GetFactory();
+
+            var dog1 = factory.GetServiceByName("Dog");
+            var dog2 = factory.GetServiceByName("Dog");
+            Assert.NotSame(dog1, dog2);
+        }
+
+        /// <summary>
+        /// Check two instances are same, if they are registered as singleton
+        /// </summary>
+        [Fact]
+        public void ResolveTwoDogs_Same()
+        {
+            var factory = new Fixture()
+                .WithSingletonRegistration()
+                .Build()?
+                .GetFactory();
+
+            var dog1 = factory.GetServiceByName("Dog");
+            var dog2 = factory.GetServiceByName("Dog");
+            Assert.Same(dog1, dog2);
+        }
+
+        [Fact]
+        public void ResolveTwoDogsTwoMice_SameMiceDifferentDogs()
+        {
+            var factory = new Fixture()
+                .WithSingletonAndTransistentRegistration()
+                .Build()?
+                .GetFactory();
+
+            var dog1 = factory.GetServiceByName("Dog");
+            var dog2 = factory.GetServiceByName("Dog");
+            var mice1 = factory.GetServiceByName("Mice");
+            var mice2 = factory.GetServiceByName("Mice");
+            // Dog is registered as singleton
+            Assert.Same(dog1, dog2);
+            // Mice has been registered as transistent
+            Assert.NotSame(mice1, mice2);
+
+        }
+
+        [Fact]
+        public void Scoped()
+        {
+            var fixture = new Fixture()
+                .WithScopedRegistration();
+            var scope1 = fixture.BuildSopedAnimalShelter();
+            var scope2 = fixture.BuildSopedAnimalShelter();
+
+            var dog1fromscope1 = scope1.GetFactory().GetServiceByName("Dog");
+            var dog2fromscope1 = scope1.GetFactory().GetServiceByName("Dog");
+            var dog1fromscope2 = scope2.GetFactory().GetServiceByName("Dog");
+            var dog2fromscope2 = scope2.GetFactory().GetServiceByName("Dog");
+
+            // from same scope
+            Assert.Same(dog1fromscope1 , dog2fromscope1);
+            Assert.Same(dog1fromscope2 , dog2fromscope2);
+
+            // not from same scope
+            Assert.NotSame(dog1fromscope1, dog1fromscope2);
+            Assert.NotSame(dog2fromscope1, dog2fromscope2);
+
+        }
     }
 }
