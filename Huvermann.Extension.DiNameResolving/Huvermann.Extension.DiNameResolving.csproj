@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+	  <TargetFrameworks>netstandard2.0;netstandard2.0;net461</TargetFrameworks>
     <Company>Huvermann Solutions GmbH</Company>
     <Authors>Heiko Huvermann</Authors>
     <Copyright>Huvermann Solutions GmbH</Copyright>
@@ -11,6 +11,7 @@
     <Description>The purpose of this extension is to provide a simple way to create a factory class that can resolve instances by name.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
