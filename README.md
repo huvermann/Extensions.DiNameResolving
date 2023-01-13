@@ -1,3 +1,6 @@
+[![Build And Test](https://github.com/huvermann/Extensions.DiNameResolving/actions/workflows/dotnet.yml/badge.svg)](https://github.com/huvermann/Extensions.DiNameResolving/actions/workflows/dotnet.yml)
+
+
 # Extensions.DiNameResolving
 Lightweight DI extension to add names to class registrations.
 
